@@ -1,0 +1,89 @@
+{$DOMAIN} {
+	encode zstd gzip
+
+	# Never reveal the server software, and cap request bodies (blog posts are the largest legitimate payload).
+	header -Server
+	request_body {
+		max_size 1MB
+	}
+
+	# Headers that are safe for every response, API included.
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-origin"
+	}
+
+	# Dotfiles and source maps must never be served. /.well-known stays reachable (security.txt, ACME).
+	@dotfiles {
+		path_regexp ^/\.
+		not path /.well-known/*
+	}
+	handle @dotfiles {
+		respond 404
+	}
+	@sourcemaps path *.map
+	handle @sourcemaps {
+		respond 404
+	}
+
+	# API: proxied to the backend, which sets its own strict headers. X-Forwarded-For is overwritten
+	# (not appended) so a client can't spoof the address the login rate limiter sees.
+	@api path /api/*
+	handle @api {
+		reverse_proxy backend:8000 {
+			header_up X-Forwarded-For {remote_host}
+			header_up Host {host}
+		}
+	}
+
+	# Single-page app.
+	handle {
+		root * /usr/share/caddy
+
+		# Only real app routes fall back to the shell. Anything else is a genuine 404 (see handle_errors).
+		@spa path / /blog /blog/* /admin /admin/*
+		rewrite @spa /index.html
+
+		header {
+			# No inline scripts at all. 'unsafe-inline' is allowed for styles only because MUI/Emotion injects
+			# <style> tags at runtime. Images may come from https: so blog cover images can be hosted anywhere.
+			Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+			X-Frame-Options "DENY"
+		}
+
+		# Hashed build assets can be cached forever; images change rarely; the HTML shell is always revalidated.
+		@immutable path /assets/*
+		header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+		@media path /media/* /logos/* /fonts/* /story/*
+		header @media Cache-Control "public, max-age=86400"
+
+		@shell not path /assets/* /media/* /logos/* /fonts/* /story/*
+		header @shell Cache-Control "no-cache"
+
+		@admin path /admin /admin/*
+		header @admin X-Robots-Tag "noindex, nofollow"
+
+		file_server
+	}
+
+	# Unknown URLs: serve the app shell (which renders the designed 404 page) but keep the 404 status.
+	handle_errors {
+		root * /usr/share/caddy
+		rewrite * /index.html
+		header {
+			Cache-Control "no-cache"
+			Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+			X-Frame-Options "DENY"
+		}
+		file_server
+	}
+}
+
+www.{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}

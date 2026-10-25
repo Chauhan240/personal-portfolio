@@ -1,0 +1,51 @@
+# Node
+node_modules/
+dist/
+frontend/dist/
+*.log
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+backend/.venv/
+
+# Data / secrets
+backend/data/
+*.db
+.env
+!.env.example
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Vite / dev process logs
+vite.out.log
+vite.err.log
+uvicorn.out.log
+uvicorn.err.log
+
+# personal documents and design references
+*.docx
+refimage.png
+
+# AI tooling and local review output (not part of the site)
+.agents/
+.claude/
+.jury/
+skills-lock.json
+
+# Design reference files used while building
+stack-mindmap.html
+trusted-by.html
+
+# Build caches and logs
+*.tsbuildinfo
+.vite/
+frontend/dist/
+backend/.venv/
+backend/*.log
+DEPLOYMENT.md

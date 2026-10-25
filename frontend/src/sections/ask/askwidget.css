@@ -1,0 +1,143 @@
+.aw {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+.aw > * { pointer-events: auto; }
+
+.aw-fab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 22px 0 18px;
+  border: 0;
+  border-radius: 9999px;
+  background: #17191c;
+  color: #fff;
+  font: 600 0.85rem 'Inter Variable', sans-serif;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 14px 30px -10px;
+  opacity: 0;
+  transform: translateY(24px) scale(0.8);
+  pointer-events: none !important;
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.2, 0.9, 0.25, 1.25), background 0.25s;
+}
+.aw.on .aw-fab { opacity: 1; transform: none; pointer-events: auto !important; }
+.aw-fab:hover { background: #5d2a1a; }
+.aw-fab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.aw-ic-x { display: none; }
+.aw.open .aw-ic-chat { display: none; }
+.aw.open .aw-ic-x { display: block; }
+.aw.open .aw-fab-l { display: none; }
+.aw.open .aw-fab { width: 56px; padding: 0; justify-content: center; }
+.aw.on:not(.open) .aw-fab::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 0 rgba(180, 83, 42, 0.5);
+  animation: aw-ping 2.6s infinite;
+  pointer-events: none;
+}
+.aw-fab { position: relative; }
+@keyframes aw-ping { 70% { box-shadow: 0 0 0 16px rgba(180, 83, 42, 0); } 100% { box-shadow: 0 0 0 0 rgba(180, 83, 42, 0); } }
+
+.aw-teaser {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 260px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 20px 20px 4px 20px;
+  background: #fff;
+  box-shadow: rgba(23, 25, 28, 0.08) 0 0 0 1px, rgba(0, 0, 0, 0.14) 0 18px 30px -14px;
+  text-align: left;
+  cursor: pointer;
+  animation: aw-in 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.2) both;
+}
+.aw-teaser b { font: 700 0.9rem 'Inter Variable', sans-serif; color: #17191c; letter-spacing: -0.02em; }
+.aw-teaser span { font: 400 0.8rem 'Inter Variable', sans-serif; color: #777b86; }
+@keyframes aw-in { from { opacity: 0; transform: translateY(12px) scale(0.92); } to { opacity: 1; transform: none; } }
+
+/* Chat panel: reuses the message styles from ask.css */
+.aw-panel.ask-window {
+  position: absolute;
+  right: 0;
+  bottom: 68px;
+  width: min(400px, calc(100vw - 24px));
+  height: min(620px, calc(100svh - 112px));
+  min-height: 0;
+  border-radius: 24px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transform-origin: 100% 100%;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.25, 1.1), visibility 0s linear 0.4s;
+}
+.aw.open .aw-panel.ask-window {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.aw-panel .ask-bar { padding: 14px 18px; }
+.aw-panel .ask-tag { margin-left: auto; font-size: 0.68rem; }
+.aw-x {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f2f3;
+  color: #17191c;
+  font: 400 1.3rem / 1 'Inter Variable', sans-serif;
+  cursor: pointer;
+}
+.aw-x:hover { background: #17191c; color: #fff; }
+.aw-panel .ask-scroll { padding: 16px 16px 8px; }
+.aw-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 10px 14px 14px;
+  border-top: 1px solid #f2f2f3;
+  background: #fafafb;
+}
+.aw-chips .chip { padding: 7px 12px; font-size: 0.74rem; }
+
+@media (max-width: 560px) {
+  .aw { right: 12px; bottom: 12px; }
+  .aw-fab-l { display: none; }
+  .aw-fab { width: 56px; padding: 0; justify-content: center; }
+  .aw-teaser { max-width: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aw-fab::after { animation: none !important; }
+}
+
+/* Work-history timeline sized for the narrow panel */
+.aw-panel .jobs { margin: 8px 0 12px 4px; }
+.aw-panel .jobs li { padding: 0 0 14px 18px; }
+.aw-panel .jobs b { font-size: 0.95rem; line-height: 1.25; letter-spacing: -0.01em; }
+.aw-panel .jobs em { font-size: 0.75rem; margin-top: 1px; }
+.aw-panel .jobs p { font-size: 0.78rem; margin-top: 3px; }
+.aw-panel .jobs .jw { font-size: 0.64rem; margin-bottom: 2px; }
+.aw-panel .text p { margin: 0 0 8px; }
+.aw-panel .follow { margin-top: 10px; }
+@media (max-width: 560px) {
+  .aw-panel.ask-window { bottom: 64px; width: calc(100vw - 24px); height: min(560px, calc(100svh - 96px)); }
+  .aw-teaser { max-width: 210px; padding: 10px 14px; }
+  .aw-teaser b { font-size: 0.82rem; }
+  .aw-teaser span { font-size: 0.74rem; }
+}

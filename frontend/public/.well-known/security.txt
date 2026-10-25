@@ -1,0 +1,4 @@
+Contact: mailto:manishchauhan.work95@gmail.com
+Expires: 2027-10-17T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://manish-chauhan.com/.well-known/security.txt
