@@ -71,6 +71,7 @@
 .aw-panel.ask-window {
   position: absolute;
   right: 0;
+  top: auto;
   bottom: 68px;
   width: min(400px, calc(100vw - 24px));
   height: min(620px, calc(100svh - 112px));
