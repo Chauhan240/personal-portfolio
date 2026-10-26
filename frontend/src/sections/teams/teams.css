@@ -40,7 +40,7 @@
   max-width: 44ch;
   font: 400 0.9rem / 1.55 'Inter Variable', sans-serif;
   letter-spacing: -0.02em;
-  color: #777b86;
+  color: #5b5f6b;
 }
 .tw-phases {
   list-style: none;
@@ -66,7 +66,7 @@
 .tw-phases li > span {
   font: 500 0.78rem 'Inter Variable', sans-serif;
   padding-top: 0.4rem;
-  color: #777b86;
+  color: #5b5f6b;
   transition: color 0.4s ease;
 }
 .tw-phases li.on > span {
@@ -82,7 +82,7 @@
   overflow: hidden;
   font: 400 0.82rem / 1.55 'Inter Variable', sans-serif;
   letter-spacing: -0.02em;
-  color: #777b86;
+  color: #5b5f6b;
   transition: max-height 0.5s ease, margin 0.5s ease;
 }
 .tw-phases li.on p {
@@ -114,7 +114,7 @@
   font: 400 0.7rem 'Inter Variable', sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #777b86;
+  color: #5b5f6b;
 }
 .tw-frame figcaption span {
   padding: 3px 10px;
@@ -213,7 +213,7 @@
 .bd .b.d rect { fill: #f2f2f3; stroke: #17191c; }
 .bd .mod rect { fill: #ffffff; stroke: #ececec; stroke-width: 1.2; }
 .bd .tx { font: 400 11.5px 'Inter Variable', sans-serif; fill: #17191c; letter-spacing: -0.01em; }
-.bd .tx.xs { font-size: 9px; letter-spacing: 0.1em; fill: #777b86; }
+.bd .tx.xs { font-size: 9px; letter-spacing: 0.1em; fill: #5b5f6b; }
 .bd .tx.mid { text-anchor: middle; }
 .bd .ud { fill: #17191c; }
 .bd .ud circle, .bd .ud path { fill: inherit; }

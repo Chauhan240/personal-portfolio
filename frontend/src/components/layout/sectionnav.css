@@ -56,12 +56,12 @@
 .sn-c i { width: 14px; height: 1px; margin: 2px 0; background: #a0a3ab; }
 @media (max-width: 560px) {
   .sn { left: 10px; bottom: 12px; }
-  .sn-b { width: 36px; height: 36px; }
+  .sn-b { width: 44px; height: 44px; }
   .sn-t { display: none; }
 }
 @media (max-width: 560px) {
   .sn { padding: 4px; gap: 4px; background: rgba(255, 255, 255, 0.82); }
-  .sn-b { width: 32px; height: 32px; }
+  .sn-b { width: 44px; height: 44px; }
   .sn-b svg { width: 16px; height: 16px; }
   .sn-c { display: none; }
 }

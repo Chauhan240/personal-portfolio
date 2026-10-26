@@ -64,7 +64,7 @@
   animation: aw-in 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.2) both;
 }
 .aw-teaser b { font: 700 0.9rem 'Inter Variable', sans-serif; color: #17191c; letter-spacing: -0.02em; }
-.aw-teaser span { font: 400 0.8rem 'Inter Variable', sans-serif; color: #777b86; }
+.aw-teaser span { font: 400 0.8rem 'Inter Variable', sans-serif; color: #5b5f6b; }
 @keyframes aw-in { from { opacity: 0; transform: translateY(12px) scale(0.92); } to { opacity: 1; transform: none; } }
 
 /* Chat panel: reuses the message styles from ask.css */

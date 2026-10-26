@@ -78,3 +78,30 @@ body {
   font-family: 'Inter Variable', sans-serif !important;
 }
 
+
+/* ---------- Accessibility pass ---------- */
+/* Comfortable hit areas without changing the visual size of small controls. */
+.st-dots button, .st-node, .sn-b { position: relative; }
+.st-dots button::after, .st-node::after {
+  content: '';
+  position: absolute;
+  inset: -17px -10px;
+}
+.st-node::after { inset: -12px -8px; }
+.st-cta, .btn { min-height: 44px; }
+.sn-b { min-width: 44px; min-height: 44px; }
+.MuiAppBar-root a, .MuiAppBar-root button { min-height: 44px; }
+.MuiAppBar-root a:not(.MuiButton-root) { display: inline-flex; align-items: center; }
+
+/* Increase Contrast: push every grey toward ink. */
+@media (prefers-contrast: more) {
+  :root { --steel: #17191c; }
+  p, li, dd, small, figcaption, span { color: #17191c; }
+  .anything p, .anything li, .anything span, .statement p, .st-canvas * { color: inherit; }
+}
+/* Reduce Transparency: drop blur and use solid surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .MuiAppBar-root, .sn, .aw-panel, .cl-face { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .MuiAppBar-root { background: #ffffff !important; }
+  .sn { background: #ffffff; }
+}

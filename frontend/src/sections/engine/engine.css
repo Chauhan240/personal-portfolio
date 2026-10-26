@@ -1,7 +1,7 @@
 /* Stack mind map: scroll-driven, one layer per step. Palette: white canvas, ink, peach, sienna. */
 .st {
   --ink: #17191c;
-  --steel: #777b86;
+  --steel: #5b5f6b;
   --graphite: #a0a3ab;
   --capsule: #ececec;
   --peach: #fbe1d1;
@@ -140,7 +140,7 @@
   background: none;
   border: 0;
   padding: 4px 0;
-  color: var(--graphite);
+  color: #6b6f7a;
   font: 600 14px / 1.29 'Inter Variable', sans-serif;
   text-align: left;
   cursor: pointer;
@@ -157,7 +157,7 @@
   margin-left: -5px;
   transition: background 0.4s, box-shadow 0.4s, border-color 0.4s;
 }
-.st-node small { font: 600 12px / 1 'Inter Variable', sans-serif; color: var(--graphite); }
+.st-node small { font: 600 12px / 1 'Inter Variable', sans-serif; color: #6b6f7a; }
 .st-node.done { color: var(--steel); }
 .st-node.done::before { background: var(--graphite); border-color: var(--graphite); }
 .st-node.on { color: var(--ink); }
@@ -275,9 +275,9 @@
   transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--dl, 0s), opacity 0.4s var(--dl, 0s), border-color 0.4s, background 0.4s;
 }
 .st-frame.in .st-bar { opacity: 1; transform: none; }
-.st-bar small { font: 600 12px / 1 'Inter Variable', sans-serif; color: var(--graphite); }
+.st-bar small { font: 600 12px / 1 'Inter Variable', sans-serif; color: #6b6f7a; }
 .st-bar b { font: 600 14px / 1.29 'Inter Variable', sans-serif; letter-spacing: -0.01em; color: var(--steel); transition: color 0.4s; }
-.st-bar svg.i { color: var(--graphite); transition: color 0.4s; }
+.st-bar svg.i { color: #6b6f7a; transition: color 0.4s; }
 .st-bar.hit { border-color: rgba(180, 83, 42, 0.5); background: linear-gradient(90deg, var(--peach), #fff 75%); }
 .st-bar.hit b { color: var(--ink); }
 .st-bar.hit svg.i { color: var(--sienna); }
